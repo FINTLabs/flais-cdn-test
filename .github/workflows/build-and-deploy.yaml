@@ -13,5 +13,5 @@ jobs:
         with:
           source_dir: '../../build'
           container_name: 'alpha'
-          connection_string: ${{ secrets.ConnectionString }}
+          connection_string: ${{ secrets.STFLAISCDN_CONNECTION_STRING }}
           overwrite: 'true'

@@ -24,4 +24,5 @@ jobs:
           source_dir: 'build'
           container_name: 'alpha'
           connection_string: ${{ secrets.STFLAISCDN_CONNECTION_STRING }}
+          extra_args: --destination-path ${{ github.repository }}
           overwrite: 'true'

@@ -1,0 +1,17 @@
+name: Blob storage website CI
+on:
+  push:
+    branches:
+      [ 'main' ]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bacongobbler/azure-blob-storage-upload@main
+        with:
+          source_dir: '../../build'
+          container_name: 'alpha'
+          connection_string: ${{ secrets.ConnectionString }}
+          overwrite: 'true'

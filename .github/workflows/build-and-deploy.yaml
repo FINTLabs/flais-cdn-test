@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          source_dir: '../../build'
+          source_dir: 'build'
           container_name: 'alpha'
           connection_string: ${{ secrets.STFLAISCDN_CONNECTION_STRING }}
           overwrite: 'true'

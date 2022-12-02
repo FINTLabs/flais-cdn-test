@@ -6,15 +6,6 @@ on:
 
 jobs:
   upload:
-    dump_contexts_to_log:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Dump GitHub context
-          id: github_context_step
-          run: echo '${{ toJSON(github) }}'
-        - name: Dump GitHub repo name without
-          id: github_context_step
-          run: echo '${{ toJSON(github.event.repository.name) }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,5 +24,5 @@ jobs:
           source_dir: 'build'
           container_name: 'alpha'
           connection_string: ${{ secrets.STFLAISCDN_CONNECTION_STRING }}
-          extra_args: --destination-path ${{ github.repository }}
+          extra_args: --destination-path ${{ github.event.repository.name }}
           overwrite: 'true'

@@ -9,6 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Delete static folder
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az storage blob delete --account-name stflaiscdn \
+            -c alpha \
+            --prefix flais-cdn-test/static
+            --account-key ${{ secrets.STFLAISCDN_KEY }}
+
 
       - name: Run install
         uses: borales/actions-yarn@v4

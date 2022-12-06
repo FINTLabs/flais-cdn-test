@@ -5,31 +5,29 @@ on:
       [ 'main' ]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Azure login
-      - uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Azure login
+#      - uses: azure/login@v1
+#        with:
+#          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+#          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+#          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
   upload:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Delete static folder
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0
-          inlineScript: |
-            az storage blob delete-batch --source alpha \
-            --account-name stflaiscdn \
-            --pattern flais-cdn-test/static/css \
-            --account-key ${{ secret.STFLAISCDN_KEY }}
-
-
+#      - name: Delete static folder
+#        uses: azure/CLI@v1
+#        with:
+#          azcliversion: 2.30.0
+#          inlineScript: |
+#            az storage blob delete-batch --source alpha \
+#            --account-name stflaiscdn \
+#            --pattern flais-cdn-test/static/css \
+#            --account-key ${{ secret.STFLAISCDN_KEY }}
       - name: Run install
         uses: borales/actions-yarn@v4
         with:

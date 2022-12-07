@@ -5,16 +5,6 @@ on:
       [ 'main' ]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Azure login
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - run: |
-          az webapp list --query "[?state=='Running']"
-
   upload:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +18,13 @@ jobs:
 #            --account-name stflaiscdn \
 #            --pattern flais-cdn-test/static/css \
 #            --account-key ${{ secret.STFLAISCDN_KEY }}
+      - name: Azure login
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - run: |
+          az webapp list --query "[?state=='Running']"
+
       - name: Run install
         uses: borales/actions-yarn@v4
         with:

@@ -5,26 +5,29 @@ on:
       [ 'main' ]
 
 jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - run: |
+          az webapp list --query "[?state=='Running']"
   upload:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#      - name: Delete static folder
-#        uses: azure/CLI@v1
-#        with:
-#          azcliversion: 2.30.0
-#          inlineScript: |
-#            az storage blob delete-batch --source alpha \
-#            --account-name stflaiscdn \
-#            --pattern flais-cdn-test/static/css \
-#            --account-key ${{ secret.STFLAISCDN_KEY }}
-      - name: Azure login
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - run: |
-          az webapp list --query "[?state=='Running']"
-
+      #      - name: Delete static folder
+      #        uses: azure/CLI@v1
+      #        with:
+      #          azcliversion: 2.30.0
+      #          inlineScript: |
+      #            az storage blob delete-batch --source alpha \
+      #            --account-name stflaiscdn \
+      #            --pattern flais-cdn-test/static/css \
+      #            --account-key ${{ secret.STFLAISCDN_KEY }}
       - name: Run install
         uses: borales/actions-yarn@v4
         with:

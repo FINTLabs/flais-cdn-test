@@ -13,27 +13,22 @@ jobs:
         with:
           creds: ${{ secrets.AZ_CLI_CDN }}
 
-      - name: Azure CLI script
+      - name: Azure Delete Batch
         uses: azure/CLI@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
             az account show
             az storage -h
+            az storage blob delete-batch --source alpha \
+            --account-name stflaiscdn \
+            --pattern flais-cdn-test/static/css \
+            --account-key ${{ secret.STFLAISCDN_KEY }}
 
   upload:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      #      - name: Delete static folder
-      #        uses: azure/CLI@v1
-      #        with:
-      #          azcliversion: 2.30.0
-      #          inlineScript: |
-      #            az storage blob delete-batch --source alpha \
-      #            --account-name stflaiscdn \
-      #            --pattern flais-cdn-test/static/css \
-      #            --account-key ${{ secret.STFLAISCDN_KEY }}
       - name: Run install
         uses: borales/actions-yarn@v4
         with:

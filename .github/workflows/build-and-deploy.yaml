@@ -23,7 +23,8 @@ jobs:
             az storage blob delete-batch --source alpha \
             --account-name stflaiscdn \
             --pattern "[flais-cdn-test/static]*" \
-            --account-key ${{ secrets.STFLAISCDN_KEY }}
+            --account-key ${{ secrets.STFLAISCDN_KEY }} \
+            --debug
 
   upload:
     runs-on: ubuntu-latest

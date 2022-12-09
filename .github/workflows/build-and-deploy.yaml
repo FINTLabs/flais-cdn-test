@@ -11,10 +11,16 @@ jobs:
 
       - uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZ_CLI_CDN }}
 
-      - run: |
-          az webapp list --query "[?state=='Running']"
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az account show
+            az storage -h
+
   upload:
     runs-on: ubuntu-latest
     steps:

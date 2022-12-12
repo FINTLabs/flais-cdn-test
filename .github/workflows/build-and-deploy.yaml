@@ -19,8 +19,9 @@ jobs:
         uses: sergeysova/jq-action@v2
       - uses: actions/checkout@v3
       - name: Test bash
-        run: bash ./test.sh
-        working-directory: build
+        run: |
+          bash ./test.sh
+          echo ls -l
 
         
 

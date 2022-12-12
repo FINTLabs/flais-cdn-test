@@ -11,6 +11,10 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZ_CLI_CDN }}
+      - name: Connect to jq-action
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: jq -n env
 
   run-bash-script:
     runs-on: ubuntu-latest

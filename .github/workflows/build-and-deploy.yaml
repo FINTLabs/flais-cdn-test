@@ -24,7 +24,7 @@ jobs:
 #            --account-key ${{ secrets.STFLAISCDN_KEY }} \
 #            --debug
       - name: Run Bash Script
-        run: upload.sh
+        run: ./.github/workflows/upload.sh
         shell: bash
 
   upload:

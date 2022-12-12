@@ -12,6 +12,17 @@ jobs:
         with:
           creds: ${{ secrets.AZ_CLI_CDN }}
 
+  run-bash-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to jq-action
+        uses: sergeysova/jq-action@v2
+      - uses: actions/checkout@v3
+      - name: Test bash
+        run: bash ./test.sh
+
+
+
   upload:
     runs-on: ubuntu-latest
     steps:
@@ -32,11 +43,3 @@ jobs:
           connection_string: ${{ secrets.STFLAISCDN_CONNECTION_STRING }}
           extra_args: --destination-path ${{ github.event.repository.name }}
           overwrite: 'true'
-
-      - name: Connect to jq-action
-        uses: sergeysova/jq-action@v2
-      - uses: actions/checkout@v3
-      - name: Test bash
-        run: |
-          bash ./test.sh
-          ls ${}

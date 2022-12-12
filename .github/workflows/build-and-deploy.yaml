@@ -13,7 +13,7 @@ jobs:
           creds: ${{ secrets.AZ_CLI_CDN }}
 
       - name: Test bash
-        run: echo "This is a test"
+        run: bash ${GITHUB_WORKSPACE}/upload
         
 
   upload:
